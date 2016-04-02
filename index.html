@@ -9,9 +9,9 @@
   </head>
   <body>
     <!-- BODY -->
-    <div class="container">
+    <div class="container" ng-controller="postsController">
 
-      <div ng-controller="navBarController">
+      <div>
 
         <div class="navbar navbar-default">
           <div class="container-fluid">
@@ -19,7 +19,7 @@
               <a class="navbar-brand" href="#">Reddit Clone</a>
             </div>
             <ul class="nav navbar-nav">
-              <li><a class="navbar-brand" href="#">+ Submit Post</a></li>
+              <li><a class="navbar-brand" href="#" ng-click="newForm= newForm+1">+ Submit Post</a></li>
             </ul>
               <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
@@ -30,19 +30,34 @@
               <div class="input-group-btn">
                 <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By<span class="caret"></span></a>
 
-                <ul class="dropdown-menu">
-                  <li class="dropdown"><a href="#">Votes</a></li>
-                  <li class="dropdown"><a href="#">Date</a></li>
-                  <li class="dropdown"><a href="#">Time</a></li>
+                <ul class="dropdown-menu" ng-model="sorts">
+                  <li class="dropdown" ng-click="sorting = 'voteCount'"><a href="#">Votes</a></li>
+                  <li class="dropdown" ng-click="sorting = 'date'"><a href="#">Date</a></li>
                 </ul>
               </div>
 
           </div>
+
+            <div class="new" ng-show="newForm%2!=0">
+              <form action"#">
+                <label for="title">Title</label><br>
+                <input type="text" placeholder="Title"><br>
+                <label for="author">Author</label><br>
+                <input type="text" placeholder="Author"><br>
+                <label for="imgUrl">Image URL</label><br>
+                <input type="text" placeholder="Image URL"><br>
+                <label for="title">Description</label><br>
+                <input type="text" placeholder="Description"><br>
+                <input type="submit" value="Submit Post"><br>
+              </form>
+            </div>
+
         </div>
       </div><!-- END OF NAVBAR -->
 
-      <div ng-controller="postsController">
-        <div ng-repeat="post in postsObject">
+      <div>
+      <p>Should be able to see sorting: {{sorting}}</p>
+        <div ng-repeat="post in postsObject | orderBy : sorting">
           <div class="postBox">
             <div class="container row">
 
@@ -59,7 +74,7 @@
                 </h3>
                 <p>{{ post.description }}</p>
                 <div class="separator">
-                  <p>Date posted: {{ post.date | date : fullDate }}</p>
+                  <p>Date posted: {{ post.date | date : 'fullDate' }}</p>
                   <p><a href="#">&#128488; {{ post.commentCount }} Comments</a></p>
                   <p><a href="#">&#9998; Add Comment</a></p>
                 </div>

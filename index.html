@@ -1,28 +1,89 @@
 <!DOCTYPE html>
-<html lang="en" ng-app='myApp'>
+<html lang="en" ng-app='redditClone'>
   <head>
     <meta charset="utf-8">
-    <title>Untitled</title>
-    
+    <title>Reddit Clone</title>
+
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    
     <link rel="stylesheet" type="text/css" href="css/main.css">
   </head>
   <body>
-    <!-- sample angular code -->
+    <!-- BODY -->
     <div class="container">
-      <div ng-controller="myController">
-        <p>{{ greeting }}</p>
+
+      <div ng-controller="navBarController">
+
+        <div class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">Reddit Clone</a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li><a class="navbar-brand" href="#">+ Submit Post</a></li>
+            </ul>
+              <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search">
+                </div>
+              </form>
+
+              <div class="input-group-btn">
+                <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By<span class="caret"></span></a>
+
+                <ul class="dropdown-menu">
+                  <li class="dropdown"><a href="#">Votes</a></li>
+                  <li class="dropdown"><a href="#">Date</a></li>
+                  <li class="dropdown"><a href="#">Time</a></li>
+                </ul>
+              </div>
+
+          </div>
+        </div>
+      </div><!-- END OF NAVBAR -->
+
+      <div ng-controller="postsController">
+        <div ng-repeat="post in postsObject">
+          <div class="postBox">
+            <div class="container row">
+
+              <div>
+                <img class="postImg" ng-src="{{ post.imgUrl }}">
+              </div>
+
+              <div class="info">
+                <!-- FIX THE END OF THIS H3 TAG -->
+                <h3>{{ post.title }} | <a class="arrow" href="#" ng-click="post.voteCount = post.voteCount + 1">&#11014; </a>
+                <a class="arrow" href="#" ng-click="post.voteCount = post.voteCount - 1">&#11015;</a>
+                <span ng-class="{'text-success': post.voteCount>0, 'text-danger': post.voteCount<0, 'text-warning': post.voteCount==0}">{{ post.voteCount }}</span>
+                <span class="user">By {{ post.postedBy }}</span>
+                </h3>
+                <p>{{ post.description }}</p>
+                <!-- <ul class="separator">
+                  <li>Date posted: {{ post.date | date : fullDate }}</li>
+                  <li><a href="#">&#128488; {{ post.commentCount }} Comments</a></li>
+                  <li><a href="#">&#9998; Add Comment</a></li>
+                </ul> -->
+                <div class="separator">
+                  <p>Date posted: {{ post.date | date : fullDate }}</p>
+                  <p><a href="#">&#128488; {{ post.commentCount }} Comments</a></p>
+                  <p><a href="#">&#9998; Add Comment</a></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    
+
+    </div> <!-- END OF CONTAINER -->
+
+
+<!-- SCRIPTS -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script type="text/javascript" src="js/variables.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
   </body>

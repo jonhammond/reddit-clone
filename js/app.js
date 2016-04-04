@@ -2,9 +2,20 @@
 
 var app = angular.module('redditClone', []);
 
-app.controller('postsController', ['$scope', '$rootScope', function($scope, $rootScope) {
-  $scope.newForm = 0;
+app.controller('postsController', ['$scope', function($scope) {
+
+  $scope.formClick = 0;
+  $scope.commentClick = 0;
   $scope.sorting = '';
+
+  $scope.submit = function(newPost) {
+    console.log(newPost);
+    $scope.newPost.date = Date.now();
+    $scope.newPost = {};
+    $scope.postsObject.push(newPost);
+    // $scope.postsObject.push(this.newTitle);
+    // $scope.newTitle = '';
+  }
 
   $scope.postsObject = [
   {title: "Outside Aspen, CO", voteCount: 10, description: ipsum, imgUrl:"http://l7.alamy.com/zooms/cdab621b79be43239a18ac9992cfb427/wildflowers-rim-creek-trail-snowmass-village-aspen-colorado-usa-dc2hd8.jpg", postedBy: "Ned Stark", date: 1425928936235, commentCount: 2},

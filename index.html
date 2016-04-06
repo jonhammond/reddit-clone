@@ -49,7 +49,7 @@
       <!-- END OF NAVBAR -->
 
       <!-- ALL POSTS -->
-      <div ng-repeat="post in postsObject | filter: search | orderBy : sorting" class="fadeIn">
+      <div ng-repeat="post in postsObject | filter: search | orderBy : sorting" class="fadeIn fadeOut">
         <div class="postBox">
           <div class="container row">
             <img class="postImg" ng-src="{{ post.imgUrl }}">

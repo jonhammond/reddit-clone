@@ -51,3 +51,13 @@ p {
   transition:1s linear all;
   opacity:1;
 }
+
+.fadeOut.ng-leave {
+  transition:1s linear all;
+  opacity:1;
+}
+
+.fadeOut.ng-leave.ng-leave-active {
+  transition:1s linear all;
+  opacity:0;
+}
